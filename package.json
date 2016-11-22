@@ -24,8 +24,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress --colors --display-error-details --display-modules",
-    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
+    "start": "webpack-dev-server --progress --colors --display-error-details --display-modules --config webpack.config.js",
+    //"build": "BABEL_ENV=production webpack --config webpack-production.config.js --colors --display-error-details --progress"
+    "build": "webpack --progress --profile --colors --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",

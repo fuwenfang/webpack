@@ -1,3 +1,7 @@
+/*我们应该新创建一个单独的config文件，因为部署上线使用webpack的时候
+我们不需要一些dev-tools,dev-server和jshint校验等。
+在package.json中添加一个build命令
+*/
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
@@ -9,7 +13,6 @@ module.exports = {
     filename: "[name].min.js",//打包后输出文件的文件名
     chunkFilename: '[id].chunk.js'
   },
-  devtool: 'eval-source-map',//配置生成Source Maps，选择合适的选项
 
   module: {//在配置文件里添加JSON loader
     loaders: [
@@ -37,10 +40,7 @@ module.exports = {
         }
     ]
   },
-  //配置jshint的选项，支持es6的校验
-  jshint: {
-    "esnext": true
-  },
+  
   postcss: [
     require('autoprefixer')//调用autoprefixer插件
   ],
@@ -60,10 +60,4 @@ module.exports = {
     })
   ],
 
-  devServer: {
-    contentBase: "./public",//本地服务器所加载的页面所在的目录
-    colors: true,//终端中输出结果为彩色
-    historyApiFallback: true,//不跳转
-    inline: true//实时刷新
-  } 
 }
