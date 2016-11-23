@@ -3,10 +3,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 module.exports = {
-  entry:  __dirname + "/app/main.js",//已多次提及的唯一入口文件,“__dirname”是Node.js中的一个全局变量，它指向当前执行脚本所在的目录。
+  entry:  {
+    main:__dirname + "/app/main.js",//已多次提及的唯一入口文件,“__dirname”是Node.js中的一个全局变量，它指向当前执行脚本所在的目录。
+    vendor: ['redux', 'react-redux', 'react-router']
+  }
   output: {
     path: __dirname + "/public",//打包后的文件存放的地方
-    filename: "[name].min.js",//打包后输出文件的文件名
+    filename: "[name].min.js",//打包后输出文件的文件名 此处的[name]是entry的key名
     chunkFilename: '[id].chunk.js'
   },
   devtool: 'eval-source-map',//配置生成Source Maps，选择合适的选项
@@ -47,11 +50,11 @@ module.exports = {
 
   plugins: [
     new webpack.BannerPlugin("Copyright Flying Unicorns inc."),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),//实时刷新插件
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),//压缩js代码的插件
     new ExtractTextPlugin("[name].min.css"),
-    new webpack.optimize.CommonsChunkPlugin,(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
     //provide $, jQuery and window.jQuery to every script
     new webpack.ProvidePlugin({
       $: "jquery",

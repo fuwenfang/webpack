@@ -51,7 +51,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin("[name].min.css"),
-    new webpack.optimize.CommonsChunkPlugin,(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
     //provide $, jQuery and window.jQuery to every script
     new webpack.ProvidePlugin({
       $: "jquery",
